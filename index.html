@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에너지시스템관리과 심리테스트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="start-screen">
+        <h1>⚡ 인덕과학기술고등학교</h1>
+        <h2>에너지시스템관리과 심리검사</h2>
+        <p>나에게 딱 맞는 전공은 무엇일까?<br>다섯 가지 질문으로 나의 적성을 알아보세요!</p>
+        <button onclick="startTest()">🚀 심리검사 시작하기</button>
+    </div>
+
+    <div class="container hidden" id="question-screen">
+        <h2 id="question-title">💡 질문 제목</h2>
+        <div id="question-options"></div>
+    </div>
+
+    <div class="container hidden" id="result-screen">
+        <h2>🎯 결과 분석</h2>
+        <div id="result-desc"></div>
+        <div class="link-section">
+            <h3>🌐 더 알아보기</h3>
+            <a href="https://induk.sen.hs.kr/" target="_blank">학교 홈페이지</a>
+            <a href="https://youtube.com/channel/UCpiJiZieDcauBL2tFW92RDw?si=ATrwa4XbFckjIvy5" target="_blank">유튜브 채널</a>
+            <p style="margin-top: 10px;">📞 입학상담: 02-902-2558</p>
+        </div>
+        <button onclick="restartTest()">🔁 다시 검사하기</button>
+    </div>
+
+    <script>
+    const questions = [
+        {
+            icon: "💡",
+            text: "휴대폰 충전기가 작동하는 원리를 상상해 본 적이 있나요?",
+            options: [
+                { text: "완전 궁금해요!", type: "에너지" },
+                { text: "관심은 없지만 신기하긴 해요", type: "융합형 인재" },
+                { text: "전혀 생각 안 해봤어요", type: "3D프린터" }
+            ]
+        },
+        {
+            icon: "🛠️",
+            text: "길거리에 있는 난간이 어떻게 붙어 있는지 상상해 본 적 있나요?",
+            options: [
+                { text: "용접이죠! 직접 해보고 싶어요!", type: "용접" },
+                { text: "도면을 보고 싶긴 했어요", type: "설비" },
+                { text: "관심 없어요", type: "융합형 인재" }
+            ]
+        },
+        {
+            icon: "🧪",
+            text: "상상한 걸 실제로 만들어 보고 싶다는 생각, 해본 적 있나요?",
+            options: [
+                { text: "항상 그런 생각해요!", type: "발명" },
+                { text: "가끔은요", type: "3D프린터" },
+                { text: "딱히 그런 생각은 안 해요", type: "융합형 인재" }
+            ]
+        },
+        {
+            icon: "⚙️",
+            text: "건물 속 복잡한 기계 설비들이 어떻게 움직이는지 궁금한가요?",
+            options: [
+                { text: "어릴 때부터 궁금했어요!", type: "설비" },
+                { text: "그냥 지나쳤어요", type: "융합형 인재" },
+                { text: "이젠 좀 알고 싶어요", type: "에너지" }
+            ]
+        },
+        {
+            icon: "🖨️",
+            text: "3D프린터로 만들 수 있는 것들을 보면 어떤가요?",
+            options: [
+                { text: "완전 신기해요! 다 만들어보고 싶어요!", type: "3D프린터" },
+                { text: "사용법이 궁금해요!", type: "융합형 인재" },
+                { text: "딱히 흥미는 없어요", type: "설비" }
+            ]
+        }
+    ];
+
+    const results = {
+        '발명': { title: "창의력 폭발! '차세대 에디슨' 타입!", desc: "💡 번뜩이는 아이디어로 세상을 바꿀 발명가 자질이 보입니다!", job: "🎨 제품 디자이너, ✨ 특허개발자" },
+        '에너지': { title: "미래를 밝히다! '그린 에너지 리더' 타입!", desc: "⚡ 똑똑한 에너지 전문가가 될 자질이 충분합니다!", job: "🔋 태양광 전문가, 🔌 에너지기술 엔지니어" },
+        '용접': { title: "강철의 마에스트로! '용접 명장' 타입!", desc: "🛠️ 산업 현장의 핵심, 정밀한 용접 전문가의 길이 열려 있습니다!", job: "👨‍🏭 용접사, 🚧 구조물 제작자" },
+        '설비': { title: "스마트 시티 설계자! '플랜트 마스터' 타입!", desc: "🏗️ 도시의 기능을 책임지는 멋진 설비 전문가가 될 수 있습니다!", job: "🏢 설비 설계자, 🛠️ 자동제어 기술자" },
+        '3D프린터': { title: "상상을 현실로! '디지털 대장장이' 타입!", desc: "🖨️ 무엇이든 만들어내는 4차 산업혁명의 핵심 인재입니다!", job: "🧑‍🎨 3D 모델러, 🧱 시제품 제작자" },
+        '융합형 인재': { title: "올라운더! '융합형 인재' 타입!", desc: "🎯 모든 기술을 섭렵하여 4차 산업혁명을 이끌어갈 리더입니다!", job: "🧠 스마트기기 전문가, 🦾 융합기술 개발자" }
+    };
+
+    let currentQuestion = 0;
+    const score = {};
+
+    function startTest() {
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('question-screen').classList.remove('hidden');
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById('question-title').innerText = `${q.icon} ${q.text}`;
+        const optionsDiv = document.getElementById('question-options');
+        optionsDiv.innerHTML = '';
+        q.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.innerText = opt.text;
+            btn.onclick = () => selectOption(opt.type);
+            btn.className = "upgrade-item";
+            optionsDiv.appendChild(btn);
+        });
+    }
+
+    function selectOption(type) {
+        score[type] = (score[type] || 0) + 1;
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById('question-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.remove('hidden');
+
+        const best = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+        const res = results[best];
+
+        document.getElementById('result-desc').innerHTML =
+            `<h2>${res.title}</h2><p>${res.desc}</p><p>${res.job}</p>`;
+    }
+
+    function restartTest() {
+        currentQuestion = 0;
+        for (const key in score) delete score[key];
+        document.getElementById('result-screen').classList.add('hidden');
+        document.getElementById('start-screen').classList.remove('hidden');
+    }
+    </script>
+</body>
+</html>
