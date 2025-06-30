@@ -1,162 +1,66 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap');
-
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Jua', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1a2238;
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  animation: background-pan 300s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: white;
+}
 @keyframes background-pan {
   from { background-position: 0% 0%; }
   to { background-position: 0% -10000%; }
 }
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Jua', sans-serif;
-  background-color: #0b0c2a;
-  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-  animation: background-pan 300s linear infinite;
-  color: #fff;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-body.shake {
-  animation: shake 0.3s ease-in-out;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.container {
-  max-width: 540px;
-  width: 100%;
-  margin: auto;
-  padding: 20px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+.game-container {
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
   border-radius: 20px;
-  border: 2px solid #9daaf2;
-  box-shadow: 0 0 20px rgba(157, 170, 242, 0.4);
-  backdrop-filter: blur(5px);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  border: 2px solid #00fff7;
+  box-shadow: 0 0 30px #00fff7;
 }
-
-h1, h2 {
-  font-family: 'Do Hyeon', sans-serif;
-  color: #ffc107;
-  text-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
-  margin-bottom: 10px;
+button {
+  font-family: 'Jua', sans-serif;
+  background-color: #ffe600;
+  border: 2px solid #ffee00;
+  padding: 12px 20px;
+  font-size: 1em;
+  color: #000000;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
-
-h1 {
-  font-size: 2em;
+button:hover {
+  background-color: #00fff7;
+  color: #1a2238;
 }
-
-h2 {
-  font-size: 1.5em;
-  color: #9daaf2;
-  text-shadow: none;
+.hidden {
+  display: none;
 }
-
-p {
+.link-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#question {
   font-size: 1.2em;
-  color: #ddd;
   margin-bottom: 20px;
 }
-
-button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #ffc107, #ff9800);
-  color: #1a2238;
-  font-family: 'Do Hyeon', sans-serif;
-  font-size: 1.1em;
-  margin-top: 15px;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
-  transition: all 0.2s;
+#options button {
+  margin: 10px 0;
+  width: 100%;
 }
 
-button:hover {
-  transform: scale(1.05);
-  background: #ffe082;
-}
-
-#question-options {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.upgrade-item {
-  background-color: rgba(255,255,255,0.1);
-  padding: 15px;
-  border-radius: 12px;
-  border: 2px solid #9daaf2;
-  color: #fff;
-  font-size: 1em;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.upgrade-item:hover {
-  background-color: #9daaf2;
-  color: #1a2238;
-  transform: scale(1.03);
-}
-
-#result-desc {
-  margin-top: 20px;
-  font-size: 1.2em;
+.highlight-major {
+  color: #e5ff51; /* 노란색 */
   font-weight: bold;
-  color: #fff;
-}
-
-.link-section {
-  margin-top: 25px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,0.2);
-}
-
-.link-section h3 {
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.link-section a {
-  color: #ffc107;
-  background: rgba(255,255,255,0.1);
-  padding: 8px 15px;
-  border-radius: 15px;
-  text-decoration: none;
-  margin: 5px;
-  display: inline-block;
-  transition: background 0.3s;
-}
-
-.link-section a:hover {
-  background: #fff;
-  color: #1a2238;
-}
-
-@media (max-width: 600px) {
-  h1 { font-size: 1.6em; }
-  h2 { font-size: 1.3em; }
-  button { font-size: 1em; }
-  #question-options { gap: 10px; }
 }
