@@ -1,63 +1,57 @@
-const startBtn = document.getElementById("start-button");
-const quizScreen = document.getElementById("quiz-screen");
-const startScreen = document.getElementById("start-screen");
-const resultScreen = document.getElementById("result-screen");
-const questionTitle = document.getElementById("question-title");
-const questionOptions = document.getElementById("question-options");
-const resultTitle = document.getElementById("result-title");
-const resultDesc = document.getElementById("result-desc");
-const restartBtn = document.getElementById("restart-button");
-const bgm = document.getElementById("bgm");
-
 const questions = [
   {
-    text: "친구가 충전기를 들고 왔을 때 나는?",
-    options: [
-      { text: "이건 어떻게 작동할까? 내부 구조가 궁금하다!", type: "에너지" },
-      { text: "이걸 더 작고 효율적으로 만들 수 없을까?", type: "발명" },
-      { text: "정비나 납땜이 잘 되어있는지 먼저 본다", type: "용접" },
-      { text: "이게 전체 시스템 안에서 어떤 역할을 할까?", type: "설비" },
-      { text: "이걸 3D 프린터로 복제할 수 있을까?", type: "3D프린터" }
+    q: "1. 가장 마음이 편한 공간은 어디인가요?",
+    icon: "🏞️",
+    answers: [
+      { text: "복잡한 상상을 펼칠 수 있는 내 방 책상 앞", type: "발명" },
+      { text: "햇빛이 비추는 따뜻한 창가", type: "에너지" },
+      { text: "단단한 금속이 얽혀있는 커다란 구조물 옆", type: "용접" },
+      { text: "위잉 위잉 소리가 복잡하게 얽힌 기계실", type: "설비" },
+      { text: "컴퓨터 앞에 앉아 3D모델링 중", type: "3D프린터" }
     ]
   },
   {
-    text: "지하철을 타고 있을 때 나는?",
-    options: [
-      { text: "안에 있는 장비들이 어떻게 연결되어 있을지 궁금해요!", type: "설비" },
-      { text: "문 닫히는 타이밍, 구조물의 용접 부위가 보여요", type: "용접" },
-      { text: "다른 노선의 동작 방식이 떠올라요", type: "에너지" },
-      { text: "이걸 더 편리하게 개선할 아이디어가 떠올라요", type: "발명" },
-      { text: "이 열차를 미니어처로 프린팅해보고 싶어요", type: "3D프린터" }
+    q: "2. 나는 어떤 말을 많이 하나요?",
+    icon: "💬",
+    answers: [
+      { text: "'이거 이렇게 한번 해보면 어때요?'", type: "발명" },
+      { text: "'에너지 낭비 아니에요?'", type: "에너지" },
+      { text: "'와 이건 어떻게 붙어있어요?'", type: "용접" },
+      { text: "'이건 대체 어디로 연결되어 있어요?'", type: "설비" },
+      { text: "'이거 이렇게 만들 수 있어요?'", type: "3D프린터" }
     ]
   },
   {
-    text: "손으로 무언가 만드는 걸 좋아한다면?",
-    options: [
-      { text: "3D 모델링 후 출력까지 하는 게 좋아요", type: "3D프린터" },
-      { text: "손으로 직접 용접하며 결과물이 나오는 게 좋아요", type: "용접" },
-      { text: "설계부터 배관까지 전체를 보는 게 좋아요", type: "설비" },
-      { text: "기존에 없던 걸 창의적으로 만들어내는 게 좋아요", type: "발명" },
-      { text: "실생활 전기 회로를 손으로 만들어보는 게 좋아요", type: "에너지" }
+    q: "3. 상상 속에서 더 자주 떠오르는 모습은?",
+    icon: "🧠",
+    answers: [
+      { text: "머릿속에서 이것 저것 조립되는 장면", type: "발명" },
+      { text: "자동차가 날아다니는 등 자연과 조화를 이루는 미래 도시", type: "에너지" },
+      { text: "망치와 불꽃, 철판이 어우러지는 작업 현장", type: "용접" },
+      { text: "파이프가 미로처럼 얽힌 도시 구조", type: "설비" },
+      { text: "3D 프린터가 움직이며 결과물이 나오는 장면", type: "3D프린터" }
     ]
   },
   {
-    text: "학교에서 제일 흥미로웠던 건?",
-    options: [
-      { text: "모형 도시에서 조명이나 냉난방 흐름을 제어한 수업", type: "설비" },
-      { text: "전기나 회로 실습하며 불이 들어오는 순간", type: "에너지" },
-      { text: "뭔가를 불꽃으로 녹여서 붙이는 실습", type: "용접" },
-      { text: "내가 만든 디자인이 실제 물건으로 출력된 순간", type: "3D프린터" },
-      { text: "아무도 생각 못한 새로운 기능을 만든 순간", type: "발명" }
+    q: "4. 만약 내가 직장인이라면 어떤 역할을 맡고 싶나요?",
+    icon: "🛠️",
+    answers: [
+      { text: "무에서 유를 창조하는 기획자", type: "발명" },
+      { text: "에너지를 효율적으로 분배하는 관리자", type: "에너지" },
+      { text: "모든 걸 정교하게 연결하는 기술자", type: "용접" },
+      { text: "복잡한 구조를 해석하는 설계자", type: "설비" },
+      { text: "상상력을 출력하는 조형 디자이너", type: "3D프린터" }
     ]
   },
   {
-    text: "나를 가장 잘 설명하는 말은?",
-    options: [
-      { text: "호기심이 많고 남들이 안 보는 부분이 궁금해요", type: "에너지" },
-      { text: "언제나 뭔가 새롭게 만들고 싶어요", type: "발명" },
-      { text: "꼼꼼하게 세밀한 작업을 잘해요", type: "용접" },
-      { text: "전체를 보고 연결짓는 게 재밌어요", type: "설비" },
-      { text: "디자인과 기술의 융합이 좋아요", type: "3D프린터" }
+    q: "5. 당신이 주변 친구들에게 가장 듣고 싶은 말은?",
+    icon: "✨",
+    answers: [
+      { text: "와! 그건 정말 기발한 생각이야!", type: "발명" },
+      { text: "너는 환경 생각을 많이 하는 구나 대단해!", type: "에너지" },
+      { text: "이렇게 튼튼하게 만든 사람 처음 봐!", type: "용접" },
+      { text: "이 설계 덕분에 모든 게 잘 연결돼", type: "설비" },
+      { text: "이거 진짜 출력했어? 실화야?", type: "3D프린터" }
     ]
   }
 ];
@@ -66,86 +60,77 @@ const results = {
   "발명": {
     title: "창의력 폭발! '차세대 에디슨' 타입!",
     desc: "당신은 번뜩이는 아이디어로 세상을 바꿀 발명가 자질이 보입니다!",
-    jobs: ["제품 디자이너", "테크벤처 창업자", "로봇 발명가"]
+    job: "추천 직업: 메이커, 발명가, UX 디자이너"
   },
   "에너지": {
     title: "미래를 밝히다! '그린 에너지 리더' 타입!",
     desc: "당신은 똑똑한 에너지 전문가가 될 자질이 충분합니다!",
-    jobs: ["전기기술자", "태양광 발전 설계자", "에너지 컨설턴트"]
+    job: "추천 직업: 전기공학자, 태양광설계사"
   },
   "용접": {
     title: "강철의 마에스트로! '용접 명장' 타입!",
     desc: "산업 현장의 핵심, 정밀한 용접 전문가의 길이 열려있습니다!",
-    jobs: ["용접사", "구조물 제작 전문가", "자동차 조립 전문가"]
+    job: "추천 직업: 특수용접사, 구조물 제작자"
   },
   "설비": {
     title: "스마트 시티 설계자! '플랜트 마스터' 타입!",
     desc: "도시의 기능을 책임지는 멋진 설비 전문가가 될 수 있습니다!",
-    jobs: ["설비기사", "배관설계사", "스마트시티 구축 기술자"]
+    job: "추천 직업: 배관설계사, 설비 엔지니어"
   },
   "3D프린터": {
     title: "상상을 현실로! '디지털 대장장이' 타입!",
     desc: "무엇이든 만들어내는 4차 산업혁명의 핵심 인재입니다!",
-    jobs: ["3D 모델러", "산업 디자이너", "제품 시제품 전문가"]
+    job: "추천 직업: 3D디자이너, 제품설계자"
   }
 };
 
-let currentQuestion = 0;
-let answers = {};
+let current = 0;
+let score = {};
 
-startBtn.addEventListener("click", () => {
-  startScreen.classList.add("hidden");
-  quizScreen.classList.remove("hidden");
-  bgm.play();
-  loadQuestion();
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("start-button").addEventListener("click", startTest);
 });
 
-restartBtn.addEventListener("click", () => {
-  resultScreen.classList.add("hidden");
-  startScreen.classList.remove("hidden");
-  currentQuestion = 0;
-  answers = {};
-});
-
-function loadQuestion() {
-  const question = questions[currentQuestion];
-  questionTitle.textContent = question.text;
-  questionOptions.innerHTML = "";
-
-  question.options.forEach(option => {
-    const btn = document.createElement("button");
-    btn.classList.add("upgrade-item");
-    btn.innerHTML = `<span class="item-name">${option.text}</span>`;
-    btn.addEventListener("click", () => handleAnswer(option.type));
-    questionOptions.appendChild(btn);
-  });
+function startTest() {
+  document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("question-screen").classList.remove("hidden");
+  showQuestion();
 }
 
-function handleAnswer(type) {
-  answers[type] = (answers[type] || 0) + 1;
-  currentQuestion++;
+function showQuestion() {
+  const q = questions[current];
+  document.getElementById("question").innerHTML = `${q.icon} ${q.q}`;
+  document.getElementById("options").innerHTML = q.answers.map((a) =>
+    `<button onclick="chooseAnswer('${a.type}')">${a.text}</button>`
+  ).join("<br><br>");
+}
 
-  if (currentQuestion < questions.length) {
-    loadQuestion();
-  } else {
+function chooseAnswer(type) {
+  score[type] = (score[type] || 0) + 1;
+  nextQuestion();
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) {
     showResult();
+  } else {
+    showQuestion();
   }
 }
 
 function showResult() {
-  quizScreen.classList.add("hidden");
-  resultScreen.classList.remove("hidden");
+  document.getElementById("question-screen").classList.add("hidden");
+  document.getElementById("result-screen").classList.remove("hidden");
+  const best = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+  document.getElementById("result-title").textContent = results[best].title;
+  document.getElementById("result-description").textContent = results[best].desc;
+  document.getElementById("result-job").textContent = results[best].job;
+}
 
-  let resultType = Object.keys(answers).reduce((a, b) =>
-    answers[a] > answers[b] ? a : b
-  );
-
-  const result = results[resultType];
-
-  resultTitle.textContent = result.title;
-  resultDesc.innerHTML = `
-    ${result.desc}<br><br>
-    <strong>어울리는 직업:</strong><br>
-    ${result.jobs.map(job => `🌟 ${job}`).join("<br>")}
-  `;
+function restartTest() {
+  current = 0;
+  score = {};
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("start-screen").classList.remove("hidden");
 }
